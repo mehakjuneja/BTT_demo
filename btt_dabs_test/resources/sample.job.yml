@@ -1,0 +1,20 @@
+# A minimal job resource so the bundle has something to deploy, run, and promote.
+# The `tags` block is the live example for BTT's "budget tags" topic:
+# these keys flow into usage data and can then be grouped/filtered in Budgets.
+resources:
+  jobs:
+    btt_sample_job:
+      name: "[${bundle.target}] BTT Sample Job"
+
+      tags:
+        project: btt
+        environment: ${bundle.target}
+        team: program-intelligence
+        cost_center: nonprofit-analytics
+
+      tasks:
+        - task_key: run_sample_notebook
+          notebook_task:
+            notebook_path: ../src/sample_notebook.py
+            base_parameters:
+              target: ${bundle.target}
